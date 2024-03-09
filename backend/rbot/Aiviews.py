@@ -40,24 +40,6 @@ class AiViewSet(APIView):
         print(request.user)
         print(request.user.chats)
         query = request.GET.get("query","")
-        # embeddings = OpenAIEmbeddings()
-        # file = os.path.join(os.path.dirname(os.path.dirname(__file__)),"./static/vectorstore")
-        # loaded_faiss=FAISS.load_local(file ,embeddings=embeddings,allow_dangerous_deserialization=True)
-
-        # llm = OpenAI()
-        # memory= ConversationBufferMemory()
-
-        # conversation=ConversationChain(llm=llm,verbose=True,memory=memory)
-
-        # chain = ConversationalRetrievalChain.from_llm(llm=llm, 
-        #                                                 retriever=loaded_faiss.as_retriever(search_kwargs={"k": 2}))
-    
-        
-        # result = chain({"question": query, 'chat_history': chat_history}, return_only_outputs=True)
-        # chat_history += [(query, result["answer"])]
-        
-        # response = chain.run(question=query, chat_history=chat_history)
-        # print(response)
         
         os.system('python test2.py ' + query)
 
