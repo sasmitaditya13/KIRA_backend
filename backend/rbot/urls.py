@@ -13,5 +13,6 @@ urlpatterns = [
     path('',views.index),
     path('',include(router.urls)),
     path('login', views.UserLoginView.as_view()),
+    path('callback', views.callback),
     path('conversation', Aiviews.AiViewSet.as_view()),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

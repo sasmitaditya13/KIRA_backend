@@ -34,24 +34,29 @@ chat_history = []
 class AiViewSet(APIView):
     
     authentication_classes = [TokenAuthentication]
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.IsAuthenticated]
     
     def post(self, request):
         print(request.user)
         print(request.user.chats)
         query = request.GET.get("query","")
-        
+        user = request.user
+        chats = user.chats
+        chats.append({"user :" + str(query)})
+        user.save()
         os.system('python test2.py ' + query)
 
         with open("/home/kirito/R-bot/backend/results.txt" , 'r') as f:
             response=f.read()
             print(response)
-    
+        chats.append({"kira :" + str(response)})
+        # print (chats)
+        user.save()
         return Response(response)
 
 class TrainViewSet(APIView):
     authentication_classes = [TokenAuthentication]
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.IsAuthenticated]
     
     def post(self, request):
         reader=PdfReader("static/datafresh.pdf")
